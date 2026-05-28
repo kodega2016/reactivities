@@ -1,0 +1,35 @@
+# .NET build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+TestResults/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# ASP.NET
+wwwroot/lib/
+appsettings.*.json
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+# Others
+*.DS_Store
+*.vs/
+*.swp
+*.tmp
+*.bak
+*.log
+
