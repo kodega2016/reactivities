@@ -33,3 +33,6 @@ packages/
 *.bak
 *.log
 
+/API/reactivities.db
+/API/reactivities.db-shm
+/API/reactivities.db-wal
