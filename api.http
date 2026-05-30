@@ -1,0 +1,8 @@
+@baseUrl=http://localhost:5000
+
+### Get all activities
+GET {{baseUrl}}/api/activities
+
+### Get activity details
+@activityID=11111111-1111-1111-1111-111111111111
+GET {{baseUrl}}/api/activities/{{activityID}}
