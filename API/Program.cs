@@ -1,4 +1,5 @@
 using Application.Activities.Queries;
+using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -15,6 +16,8 @@ builder.Services.AddCors();
 builder.Services.AddMediatR(options =>
     options.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>()
 );
+
+builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfiles));
 
 var app = builder.Build();
 
