@@ -22,7 +22,7 @@ public class DeleteActivity
                 throw new Exception("Cannot find the activity");
 
             context.Activities.Remove(activity);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
         }
     }
 }
