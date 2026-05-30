@@ -6,3 +6,19 @@ GET {{baseUrl}}/api/activities
 ### Get activity details
 @activityID=11111111-1111-1111-1111-111111111111
 GET {{baseUrl}}/api/activities/{{activityID}}
+
+### Create activity
+POST {{baseUrl}}/api/activities
+Content-Type: application/json
+
+{
+    "title": "AI Agent using Golang",
+    "date": "2024-05-01T00:00:00",
+    "description": "Activity 1 month ago",
+    "category": "tech",
+    "isCancelled": false,
+    "city": "Melbourne",
+    "venue": "Louvre Museum, Rue Saint-Honoré, Quartier du Palais Royal, 1st Arrondissement, Paris, Ile-de-France, Metropolitan France, 75001, France",
+    "latitude": 48.8611473,
+    "longitude": 2.33802768704666
+}
