@@ -1,3 +1,4 @@
+using Application.Activities.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -11,6 +12,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddCors();
+builder.Services.AddMediatR(options =>
+    options.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>()
+);
 
 var app = builder.Build();
 
