@@ -1,14 +1,12 @@
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 
 import "./index.css";
 import Navbar from "./Navbar";
-import ActivityDashboard from "../../features/activities/ActivityDashboard";
+import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard.tsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 function App() {
-
   const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
@@ -20,17 +18,15 @@ function App() {
       })
       .catch((error) => console.log(error));
 
-    return () => {
-    };
+    return () => {};
   }, []);
 
-
   return (
-    <>
+    <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
       <Navbar />
       <ActivityDashboard activities={activities} />
-    </>
+    </Box>
   );
 }
 
