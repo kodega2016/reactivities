@@ -11,9 +11,14 @@ export default function ActivityForm() {
         <TextField label="Description" multiline rows={3} />
         <TextField label="Category" />
         <TextField label="Date" type="date" />
-        <TextField label="Venue" />
         <TextField label="City" />
-        <Button variant="contained">Save</Button>
+        <TextField label="Venue" />
+        <Box sx={{ display: "flex", justifyContent: "end", gap: 2 }}>
+          <Button color="inherit">Cancel</Button>
+          <Button color="success" variant="contained">
+            Save
+          </Button>
+        </Box>
       </Box>
     </Paper>
   );
