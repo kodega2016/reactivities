@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 
 import "./index.css";
 import Navbar from "./Navbar";
@@ -8,6 +8,9 @@ import axios from "axios";
 
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<
+    Activity | undefined
+  >();
 
   useEffect(() => {
     axios
@@ -21,11 +24,25 @@ function App() {
     return () => {};
   }, []);
 
+  const handleSelectActivity = (id: string) => {
+    setSelectedActivity(activities.find((x) => x.id === id) || undefined);
+  };
+  const handleCancelSelectAcitivity = () => {
+    setSelectedActivity(undefined);
+  };
+
   return (
-    <Box sx={{ bgcolor: "#eeeeee" }}>
+    <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
       <CssBaseline />
-      <Navbar />
-      <ActivityDashboard activities={activities} />
+      <Container maxWidth="lg">
+        <Navbar />
+        <ActivityDashboard
+          activities={activities}
+          selectActivity={handleSelectActivity}
+          cancelSelectedActivity={handleCancelSelectAcitivity}
+          selectedActivity={selectedActivity}
+        />
+      </Container>
     </Box>
   );
 }
