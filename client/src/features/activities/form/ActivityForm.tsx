@@ -1,6 +1,10 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 
-export default function ActivityForm() {
+type Props = {
+  closeForm: () => void;
+};
+
+export default function ActivityForm({ closeForm }: Props) {
   return (
     <Paper sx={{ padding: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
@@ -14,7 +18,9 @@ export default function ActivityForm() {
         <TextField label="City" />
         <TextField label="Venue" />
         <Box sx={{ display: "flex", justifyContent: "end", gap: 2 }}>
-          <Button color="inherit">Cancel</Button>
+          <Button color="inherit" onClick={closeForm}>
+            Cancel
+          </Button>
           <Button color="success" variant="contained">
             Save
           </Button>

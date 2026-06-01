@@ -37,3 +37,6 @@ packages/
 /API/reactivities.db-shm
 /API/reactivities.db-wal
 /API/reactivities.db
+/API/Database.db
+/API/Database.db-shm
+/API/Database.db-wal

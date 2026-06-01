@@ -5,7 +5,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Add } from "@mui/icons-material";
 
-export default function Navbar() {
+type Props = {
+  openForm: () => void;
+};
+
+export default function Navbar({ openForm }: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -45,6 +49,7 @@ export default function Navbar() {
               color="secondary"
               startIcon={<Add />}
               sx={{ textTransform: "none", fontWeight: "bold" }}
+              onClick={openForm}
             >
               New Activity
             </Button>
