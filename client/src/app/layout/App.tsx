@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 
 import "./index.css";
 import Navbar from "./Navbar";
@@ -9,7 +9,7 @@ function App() {
     <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Navbar openForm={() => {}} />
+        <Navbar />
         <Outlet />
       </Container>
     </Box>
