@@ -8,19 +8,23 @@ type Props = {
 };
 
 export default function ActivityForm({ closeForm, activity }: Props) {
-  const { updateActivity } = useActivities();
+  const { updateActivity, createActivity } = useActivities();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const data: { [key: string]: FormDataEntryValue } = {};
     const formData = new FormData(event.currentTarget);
 
-    formData.forEach((defaultValue, key) => {
-      data[key] = defaultValue;
+    formData.forEach((value, key) => {
+      data[key] = value;
     });
 
     if (activity) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
+      closeForm();
+    } else {
+      await createActivity.mutateAsync(data as unknown as Activity);
       closeForm();
     }
   };
@@ -35,27 +39,27 @@ export default function ActivityForm({ closeForm, activity }: Props) {
         onSubmit={handleSubmit}
         sx={{ display: "flex", flexDirection: "column", mb: "3", gap: 1 }}
       >
-        <TextField name="title" label="Title" defaultValue={activity?.title} />
+        <TextField name="title" label="Title" value={activity?.title} />
         <TextField
           name="description"
           label="Description"
           multiline
           rows={3}
-          defaultValue={activity?.description}
+          value={activity?.description}
         />
         <TextField
           label="Category"
-          defaultValue={activity?.category}
+          value={activity?.category}
           name="category"
         />
         <TextField
           name="date"
           label="Date"
-          defaultValue={activity?.date}
+          value={activity?.date}
           type="date"
         />
-        <TextField name="city" label="City" defaultValue={activity?.city} />
-        <TextField name="venue" label="Venue" defaultValue={activity?.venue} />
+        <TextField name="city" label="City" value={activity?.city} />
+        <TextField name="venue" label="Venue" value={activity?.venue} />
         <Box sx={{ display: "flex", justifyContent: "end", gap: 2 }}>
           <Button color="inherit" onClick={closeForm}>
             Cancel
