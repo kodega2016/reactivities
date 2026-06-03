@@ -12,7 +12,6 @@ export default function ActivityForm({ closeForm, activity }: Props) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data: { [key: string]: FormDataEntrydefaultValue } = {};
     const formData = new FormData(event.currentTarget);
 
     formData.forEach((defaultValue, key) => {
