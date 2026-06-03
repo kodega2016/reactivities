@@ -12,7 +12,7 @@ function App() {
     Activity | undefined
   >();
 
-  const [editMode, setEditMode] = useState<bool>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     axios
@@ -43,6 +43,18 @@ function App() {
     setEditMode(false);
   };
 
+  const handleSubmitForm = (activity: Activity) => {
+    if (activity.id) {
+      setActivities(
+        activities.map((x) => (x.id === activity.id ? activity : x)),
+      );
+    } else {
+      const newActivity = { ...activity, id: activities.length.toString() };
+      setActivities([...activities, { ...newActivity }]);
+    }
+    setEditMode(false);
+  };
+
   return (
     <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
       <CssBaseline />
@@ -56,6 +68,7 @@ function App() {
           editMode={editMode}
           openForm={handleOpenForm}
           closeForm={handleCloseForm}
+          submitForm={handleSubmitForm}
         />
       </Container>
     </Box>
