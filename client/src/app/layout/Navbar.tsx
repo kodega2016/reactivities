@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Add } from "@mui/icons-material";
+import { NavLink } from "react-router";
 
 export default function Navbar() {
   return (
@@ -20,8 +20,9 @@ export default function Navbar() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography
               variant="h6"
-              component="div"
+              component={NavLink}
               sx={{ fontWeight: "bold", letterSpacing: 0.5 }}
+              to="/"
             >
               Reactivities
             </Typography>
@@ -31,6 +32,8 @@ export default function Navbar() {
             <Button
               color="inherit"
               sx={{ textTransform: "none", fontWeight: "bold" }}
+              component={NavLink}
+              to="/activities"
             >
               Activities
             </Button>
@@ -43,9 +46,9 @@ export default function Navbar() {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<Add />}
               sx={{ textTransform: "none", fontWeight: "bold" }}
-              onClick={() => {}}
+              component={NavLink}
+              to="/activity-form"
             >
               New Activity
             </Button>
