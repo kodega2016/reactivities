@@ -40,3 +40,6 @@ packages/
 /API/Database.db
 /API/Database.db-shm
 /API/Database.db-wal
+/.aider.input.history
+/.aider.chat.history.md
+/client/.env.development
