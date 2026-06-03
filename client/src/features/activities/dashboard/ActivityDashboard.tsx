@@ -1,48 +1,24 @@
 import Grid from "@mui/material/Grid";
 import ActivitiesList from "./ActivityList";
-import ActivityDetail from "../details/ActivityDetail";
-import ActivityForm from "../form/ActivityForm";
+import { useActivities } from "../../../lib/hooks/useActivities";
 
-type Props = {
-  activities: Activity[];
-  selectActivity: (id: string) => void;
-  cancelSelectedActivity: () => void;
-  selectedActivity?: Activity;
-  openForm: (id?: string) => void;
-  closeForm: () => void;
-  editMode: boolean;
-};
+export default function ActivityDashboard() {
+  const { activities } = useActivities();
 
-export default function ActivityDashboard({
-  activities,
-  selectedActivity,
-  selectActivity,
-  cancelSelectedActivity,
-  openForm,
-  closeForm,
-  editMode,
-}: Props) {
+  const selectActivity = (id: string) => {
+    console.log(id);
+  };
+
   return (
     <>
       <Grid container sx={{ mt: 2 }} spacing={3}>
         <Grid size={7}>
           <ActivitiesList
-            activities={activities}
+            activities={activities ?? []}
             selectActivity={selectActivity}
           />
         </Grid>
-        <Grid size={5}>
-          {editMode && (
-            <ActivityForm closeForm={closeForm} activity={selectedActivity} />
-          )}
-          {selectedActivity && !editMode && (
-            <ActivityDetail
-              activity={selectedActivity}
-              openForm={openForm}
-              cancelSelectedActivity={cancelSelectedActivity}
-            />
-          )}
-        </Grid>
+        <Grid size={5}>Activity Filter Goes Here</Grid>
       </Grid>
     </>
   );

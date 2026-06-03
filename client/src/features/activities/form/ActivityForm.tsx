@@ -2,13 +2,12 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import type { FormEvent } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
 
-type Props = {
-  closeForm: () => void;
-  activity: Activity | undefined;
-};
-
-export default function ActivityForm({ closeForm, activity }: Props) {
+export default function ActivityForm() {
   const { updateActivity, createActivity } = useActivities();
+  const activity = {} as Activity;
+  const closeForm = () => {
+    console.log("close the form");
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
