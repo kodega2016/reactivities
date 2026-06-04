@@ -1,18 +1,28 @@
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline, GlobalStyles } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./index.css";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router";
 
+const theme = createTheme({
+  typography: {
+    fontFamily: '"BioRhyme", serif',
+  },
+});
+
 function App() {
   return (
-    <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Navbar />
-        <Outlet />
-      </Container>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
+        <CssBaseline />
+        <GlobalStyles styles={{ body: { fontFamily: '"BioRhyme", serif' } }} />
+        <Container maxWidth="lg">
+          <Navbar />
+          <Outlet />
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 }
 

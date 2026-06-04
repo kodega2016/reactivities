@@ -1,12 +1,15 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import type { FormEvent } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
+import { useNavigate } from "react-router";
 
 export default function ActivityForm() {
   const { updateActivity, createActivity } = useActivities();
+  const navigate = useNavigate();
   const activity = {} as Activity;
+
   const closeForm = () => {
-    console.log("close the form");
+    navigate("/activities");
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -18,7 +21,7 @@ export default function ActivityForm() {
       data[key] = value;
     });
 
-    if (activity) {
+    if (activity && activity.id != null) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
       closeForm();
