@@ -6,18 +6,15 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useParams } from "react-router";
+import { useActivities } from "../../../lib/hooks/useActivities";
 
-type Props = {
-  activity: Activity;
-  cancelSelectedActivity: (id: string) => void;
-  openForm: (id?: string) => void;
-};
+export default function ActivityDetail() {
+  const { id } = useParams();
+  const { activity, isLoadingActivity } = useActivities(id);
 
-export default function ActivityDetail({
-  activity,
-  cancelSelectedActivity,
-  openForm,
-}: Props) {
+  if (isLoadingActivity) return <Typography>Loading...</Typography>;
+
   return (
     <Card>
       <CardMedia
@@ -31,13 +28,10 @@ export default function ActivityDetail({
         <Typography variant="body1">{activity.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button color="primary" onClick={() => openForm(activity.id)}>
+        <Button color="primary" onClick={() => {}}>
           Edit
         </Button>
-        <Button
-          color="inherit"
-          onClick={() => cancelSelectedActivity(activity.id)}
-        >
+        <Button color="inherit" onClick={() => {}}>
           Cancel
         </Button>
       </CardActions>
