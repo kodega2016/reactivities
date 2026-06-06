@@ -6,11 +6,12 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useActivities } from "../../../lib/hooks/useActivities";
 
 export default function ActivityDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { activity, isLoadingActivity } = useActivities(id);
 
   if (isLoadingActivity) return <Typography>Loading...</Typography>;
@@ -31,7 +32,7 @@ export default function ActivityDetail() {
         <Button color="primary" onClick={() => {}}>
           Edit
         </Button>
-        <Button color="inherit" onClick={() => {}}>
+        <Button color="inherit" onClick={() => navigate("/activities")}>
           Cancel
         </Button>
       </CardActions>
