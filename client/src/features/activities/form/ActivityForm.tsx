@@ -4,8 +4,8 @@ import { useActivities } from "../../../lib/hooks/useActivities";
 import { useNavigate, useParams } from "react-router";
 
 export default function ActivityForm() {
-  const {id}=useParams();
-  const { updateActivity, createActivity,activity } = useActivities(id);
+  const { id } = useParams();
+  const { updateActivity, createActivity, activity } = useActivities(id);
   const navigate = useNavigate();
 
   const closeForm = () => {
@@ -24,9 +24,13 @@ export default function ActivityForm() {
     if (activity && activity.id != null) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
-      navigate(`/activities/{activity.id}`)
+      navigate(`/activities/${activity.id}`);
     } else {
-      await createActivity.mutateAsync(data as unknown as Activity);
+      await createActivity.mutateAsync(data as unknown as Activity, {
+        onSuccess: (id) => {
+          navigate(`/activities/${id}`);
+        },
+      });
       closeForm();
     }
   };
@@ -34,7 +38,7 @@ export default function ActivityForm() {
   return (
     <Paper sx={{ padding: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
-     {activity==null?   "Create new activity":"Update Activity"}
+        {activity == null ? "Create new activity" : "Update Activity"}
       </Typography>
       <Box
         component={"form"}
