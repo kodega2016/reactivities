@@ -15,6 +15,9 @@ export default function ActivityDetail() {
   const { activity, isLoadingActivity } = useActivities(id);
 
   if (isLoadingActivity) return <Typography>Loading...</Typography>;
+  if(activity==null){
+    return <Typography>{`Activity with the given id ${id} not found`}</Typography>
+  }
 
   return (
     <Card>
@@ -29,7 +32,7 @@ export default function ActivityDetail() {
         <Typography variant="body1">{activity.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button color="primary" onClick={() => {}}>
+        <Button color="primary" onClick={() => navigate(`/manage/${id}`)}>
           Edit
         </Button>
         <Button color="inherit" onClick={() => navigate("/activities")}>

@@ -1,12 +1,12 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import type { FormEvent } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 export default function ActivityForm() {
-  const { updateActivity, createActivity } = useActivities();
+  const {id}=useParams();
+  const { updateActivity, createActivity,activity } = useActivities(id);
   const navigate = useNavigate();
-  const activity = {} as Activity;
 
   const closeForm = () => {
     navigate("/activities");
@@ -24,7 +24,7 @@ export default function ActivityForm() {
     if (activity && activity.id != null) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
+      navigate(`/activities/{activity.id}`)
     } else {
       await createActivity.mutateAsync(data as unknown as Activity);
       closeForm();
@@ -34,34 +34,34 @@ export default function ActivityForm() {
   return (
     <Paper sx={{ padding: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
-        Create new activity
+     {activity==null?   "Create new activity":"Update Activity"}
       </Typography>
       <Box
         component={"form"}
         onSubmit={handleSubmit}
         sx={{ display: "flex", flexDirection: "column", mb: "3", gap: 1 }}
       >
-        <TextField name="title" label="Title" value={activity?.title} />
+        <TextField name="title" label="Title" defaultValue={activity?.title} />
         <TextField
           name="description"
           label="Description"
           multiline
           rows={3}
-          value={activity?.description}
+          defaultValue={activity?.description}
         />
         <TextField
           label="Category"
-          value={activity?.category}
+          defaultValue={activity?.category}
           name="category"
         />
         <TextField
           name="date"
           label="Date"
-          value={activity?.date}
+          defaultValue={activity?.date}
           type="date"
         />
-        <TextField name="city" label="City" value={activity?.city} />
-        <TextField name="venue" label="Venue" value={activity?.venue} />
+        <TextField name="city" label="City" defaultValue={activity?.city} />
+        <TextField name="venue" label="Venue" defaultValue={activity?.venue} />
         <Box sx={{ display: "flex", justifyContent: "end", gap: 2 }}>
           <Button color="inherit" onClick={closeForm}>
             Cancel
