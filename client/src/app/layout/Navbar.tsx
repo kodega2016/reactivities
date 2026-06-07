@@ -7,7 +7,6 @@ export default function Navbar() {
       position="static" 
       sx={{
         backgroundImage: "linear-gradient(135deg,#182a73 0%,#218a73 69%,#20a7ac 89%)",
-        borderRadius: 2,
       }}
     >
       <Container maxWidth="xl">

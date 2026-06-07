@@ -61,7 +61,7 @@ export default function ActivityForm() {
         <TextField
           name="date"
           label="Date"
-          defaultValue={activity?.date}
+          defaultValue={activity?.date ? activity.date.split("T")[0] : undefined}
           type="date"
         />
         <TextField name="city" label="City" defaultValue={activity?.city} />

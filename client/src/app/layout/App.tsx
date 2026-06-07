@@ -17,7 +17,7 @@ function App() {
       <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
         <CssBaseline />
         <GlobalStyles styles={{ body: { fontFamily: '"BioRhyme", serif' } }} />
-        <Container maxWidth="lg">
+        <Container maxWidth={false} disableGutters sx={{ px: 3 }}>
           <Navbar />
           <Outlet />
         </Container>
