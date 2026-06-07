@@ -91,7 +91,8 @@ export default function ActivityCard({ activity }: Props) {
             component={Link}
             to={`/activities/${activity.id}`}
             variant="contained"
-            sx={{ ml: "auto" }}
+            size="medium"
+            sx={{ ml: "auto", borderRadius: 3 }}
           >
             View
           </Button>
