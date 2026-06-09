@@ -1,6 +1,7 @@
 import Grid from "@mui/material/Grid";
 import ActivitiesList from "./ActivityList";
 import { useActivities } from "../../../lib/hooks/useActivities";
+import ActivityFilters from "./ActivityFilters";
 
 export default function ActivityDashboard() {
   const { activities } = useActivities();
@@ -18,7 +19,9 @@ export default function ActivityDashboard() {
             selectActivity={selectActivity}
           />
         </Grid>
-        <Grid size={5}>Activity Filter Goes Here</Grid>
+        <Grid size={5}>
+          <ActivityFilters />
+          </Grid>
       </Grid>
     </>
   );

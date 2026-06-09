@@ -1,7 +1,11 @@
 import { Box, Typography, Card, CardContent, TextField, Avatar } from "@mui/material";
 import { Link } from "react-router";
 
-export default function ActivityDetailsChat() {
+type Props = {
+  activity: Activity;
+};
+
+export default function ActivityDetailsChat({ activity }: Props) {
     return (
         <>
             <Box
@@ -12,7 +16,7 @@ export default function ActivityDetailsChat() {
                     padding: 2
                 }}
             >
-                <Typography variant="h6">Chat about this event</Typography>
+                <Typography variant="h6">Chat about {activity.title}</Typography>
             </Box>
             <Card>
                 <CardContent>
