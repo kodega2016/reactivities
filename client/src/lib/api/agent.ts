@@ -1,4 +1,5 @@
 import axios from "axios";
+import { store } from "../stores/store";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -15,7 +16,14 @@ agent.interceptors.response.use(async (response) => {
     return response;
   } catch (error) {
     return Promise.reject(error);
+  } finally {
+    store.uiStore.isIdle();
   }
+});
+
+agent.interceptors.request.use((config) => {
+  store.uiStore.isBusy();
+  return config;
 });
 
 export default agent;
