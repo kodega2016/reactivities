@@ -1,15 +1,31 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Application.Activities.DTOs;
 
 public class CreateActivityDto
 {
-  public required string Title { get; set; }
+  [Required]
+  public string Title { get; set; } = "";
+
+  [Required]
   public DateTime Date { get; set; }
-  public required string Description { get; set; }
-  public required string Category { get; set; }
+
+  [Required]
+  public string Description { get; set; } = "";
+
+  [Required]
+  public string Category { get; set; } = "";
 
   // location props
-  public required string City { get; set; }
-  public required string Venue { get; set; }
+  [Required]
+  public string City { get; set; } = "";
+
+  [Required]
+  public string Venue { get; set; } = "";
+
+  [Required]
   public double Latitude { get; set; }
+
+  [Required]
   public double Longitude { get; set; }
 }
