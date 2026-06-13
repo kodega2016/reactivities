@@ -14,6 +14,8 @@ public class CreateActivityValidator : AbstractValidator<CreateActivity.Command>
     RuleFor(x => x.ActivityDto.Category).NotEmpty().WithMessage("Category is required");
     RuleFor(x => x.ActivityDto.City).NotEmpty().WithMessage("City is required");
     RuleFor(x => x.ActivityDto.Venue).NotEmpty().WithMessage("Venue is required");
+    RuleFor(x => x.ActivityDto.Latitude).NotEmpty().WithMessage("Latitude is required");
+    RuleFor(x => x.ActivityDto.Longitude).NotEmpty().WithMessage("Longitude is required");
     RuleFor(x => x.ActivityDto.Latitude).InclusiveBetween(-90, 90).WithMessage("Latitude must be between -90 and 90");
     RuleFor(x => x.ActivityDto.Longitude).InclusiveBetween(-180, 180).WithMessage("Longitude must be between -180 and 180");
   }
