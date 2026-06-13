@@ -20,8 +20,10 @@ builder.Services.AddCors();
 
 // Configure the Mediator
 builder.Services.AddMediatR(options =>
-    options.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>()
-);
+{
+  options.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>();
+  options.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 
 
 // Configure Automapper
