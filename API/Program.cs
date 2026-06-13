@@ -1,5 +1,7 @@
 using Application.Activities.Queries;
+using Application.Activities.Validators;
 using Application.Core;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -9,15 +11,24 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+  options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+// Configure CORS
 builder.Services.AddCors();
+
+// Configure the Mediator
 builder.Services.AddMediatR(options =>
     options.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>()
 );
 
+
+// Configure Automapper
 builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfiles));
+
+// Configure Validtors
+builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
 
 var app = builder.Build();
 
