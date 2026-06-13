@@ -1,3 +1,4 @@
+using Application.Core;
 using AutoMapper;
 using Domain;
 using MediatR;
@@ -7,24 +8,26 @@ namespace Application.Activities.Commands;
 
 public class EditActivity
 {
-    public class Command : IRequest
-    {
-        public required Activity Activity { get; set; }
-    }
+  public class Command : IRequest<Result<Unit>>
+  {
+    public required Activity Activity { get; set; }
+  }
 
-    public class Handle(AppDbContext context, IMapper mapper) : IRequestHandler<Command>
+  public class Handle(AppDbContext context, IMapper mapper) : IRequestHandler<Command, Result<Unit>>
+  {
+    async Task<Result<Unit>> IRequestHandler<Command, Result<Unit>>.Handle(
+        Command request,
+        CancellationToken cancellationToken
+    )
     {
-        async Task IRequestHandler<Command>.Handle(
-            Command request,
-            CancellationToken cancellationToken
-        )
-        {
-            var activity = await context.Activities.FindAsync(request.Activity.Id);
-            if (activity == null)
-                throw new Exception("Cannot find the activity");
-            activity.Title = request.Activity.Title;
-            mapper.Map(request.Activity, activity);
-            await context.SaveChangesAsync();
-        }
+      var activity = await context.Activities.FindAsync([request.Activity.Id], cancellationToken);
+      if (activity == null)
+        return Result<Unit>.Failure("Cannot find the activity", 404);
+      activity.Title = request.Activity.Title;
+      mapper.Map(request.Activity, activity);
+      var result = await context.SaveChangesAsync(cancellationToken) > 0;
+      if (!result) return Result<Unit>.Failure("Failed to update the activity", 400);
+      return Result<Unit>.Success(Unit.Value);
     }
+  }
 }
